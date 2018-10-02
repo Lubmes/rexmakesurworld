@@ -13,14 +13,17 @@ defmodule RexmakesurworldWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", RexmakesurworldWeb do
-    pipe_through :browser # Use the default browser stack
+  scope "/" do
+    pipe_through :api
 
-    get "/", PageController, :index
+    pipe_through :api
+
+    forward "/api", Absinthe.Plug,
+      schema: Rexmakesurworld.Schema
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: Rexmakesurworld.Schema,
+      interface: :simple
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", RexmakesurworldWeb do
-  #   pipe_through :api
-  # end
 end
