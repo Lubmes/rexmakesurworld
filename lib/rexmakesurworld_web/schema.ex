@@ -3,6 +3,7 @@ defmodule Rexmakesurworld.Schema do
   alias Rexmakesurworld.{Project, Repo}
 
   query do
+    @desc "Lijst van projecten"
     field :projects, list_of(:project) do
       resolve fn _, _, _ ->
         {:ok, Repo.all(Project)}
