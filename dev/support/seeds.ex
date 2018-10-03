@@ -28,5 +28,7 @@ defmodule Rexmakesurworld.Seeds do
         description: "Allerlei ideeën verzameld die impact kunnen hebben regiobreed."
       }
       |> Repo.insert!
+
+    :ok
   end
 end
