@@ -38,4 +38,27 @@ defmodule Rexmakesurworld.Schema.Mutation.CreateProjectTest do
     }
   end
 
+
+  test "creëren van een project met een bestaande titel faalt" do
+    project = %{
+      "title" => "Een concreet begin",
+      "description" => "Whatever, ...",
+    }
+    conn = build_conn()
+    conn = post conn, "/api",
+      query: @query,
+      variables: %{"project" => project}
+
+    assert json_response(conn, 200) == %{
+      "data" => %{"createProject" => nil},
+      "errors" => [
+        %{
+          "locations" => [%{"column" => 0, "line" => 2}],
+          "message" => "Could not create project",
+          "path" => ["createProject"]
+        }
+      ]
+    }
+  end
+
 end

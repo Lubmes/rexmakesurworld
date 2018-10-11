@@ -20,6 +20,7 @@ defmodule Rexmakesurworld.Project do
     project
     |> cast(attrs, [:title, :description])
     |> validate_required([:title])
+    |> unique_constraint(:title)
   end
 
   def create_project(attrs \\ %{}) do
